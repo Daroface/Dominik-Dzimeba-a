@@ -1,0 +1,1676 @@
+#include <gtk/gtk.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+
+
+typedef struct tmp_
+{
+    GtkWidget *okno;
+
+    GtkWidget *obraz;
+    GtkWidget *info[5];
+    GtkWidget *numerki[9];
+
+    GtkWidget *konte;
+    GtkWidget *konte2;
+
+    GtkWidget *scrolled;
+
+    GtkWidget *wgame;
+    GtkWidget *cgame;
+    GtkWidget *game;
+    GtkWidget *instr;
+    GtkWidget *exitt;
+
+    GtkWidget *kolor[6];
+
+    GtkWidget *kod[4];
+    GtkWidget *wybor[4];
+
+    GtkWidget *proba[9][4];
+    GtkWidget *wproba[9][4];
+    GtkWidget *sprawdze[9][4];
+
+    int *tproba[4];
+
+    GtkWidget *startk;
+    GtkWidget *sprawdzz;
+   int *tkod[4];
+    int y, j, i, a, aaa, b, c, d, f, aa, bb, cc, dd, ff, e, fff;
+   int test;
+    int runda[3];
+   int kontrola;
+    int test2;
+    int pomoc;
+    int omin[5];
+    int podo[4][2];
+
+
+
+}tmp;
+
+void sprawdzaniee(GtkWidget *widget, tmp* data)
+{
+    if(data->kontrola==0)
+        {int k=0, p=0, x=0;
+    data->omin[0]=5;
+    data->podo[0][0]=5;
+
+data->tkod[data->test]=data->pomoc;
+//pocz
+
+int t=0, u=0, l=0, o=0, lo=0, oo=0, loo=0;
+
+t = 0;
+while (t<4)
+{
+	if (data->tkod[t] == data->tproba[t])
+	{
+		data->omin[k + 1] = 5;
+		data->omin[k] = t;
+		k++;
+	}
+	t++;
+}
+t = 0, u = 0, lo = 0, loo = 0;
+
+while( t < 4)
+{
+	while( u < 4)
+	{
+		while( lo < k)
+		{
+			if (t == data->omin[lo])
+			{
+					o = 1;
+					break;
+			}
+			else
+			{
+				if (u == data->omin[lo])
+				{
+					o = 2;
+					break;
+				}
+				else
+				{
+					lo++;
+				}
+			}
+		}
+		if (o == 1)
+		{
+			o = 0;
+			lo = 0;
+			break;
+		}
+		else
+		{
+			if (o == 2)
+			{
+				o = 0;
+				lo = 0;
+				u++;
+				continue;
+			}
+			else
+			{
+				lo = 0;
+				while( loo < p)
+				{
+					if (t == data->podo[lo][0])
+					{
+						o = 1;
+						break;
+					}
+					else
+					{
+						if (u == data->podo[lo][1])
+						{
+							o = 2;
+							break;
+						}
+						else
+						{
+							loo++;
+						}
+					}
+				}
+				if (o == 1)
+				{
+					o = 0;
+					loo = 0;
+					break;
+				}
+				else
+				{
+					if (o == 2)
+					{
+						o = 0;
+						loo = 0;
+						u++;
+						continue;
+					}
+					else
+					{
+						if (data->tkod[t] == data->tproba[u])
+						{
+							loo = 0;
+							data->podo[p][0] = t;
+							data->podo[p][1] = u;
+							p++;
+							break;
+						}
+						else
+                        {
+                            u++;
+                            continue;
+                        }
+					}
+				}
+			}
+		}
+	}
+	t++;
+	u = 0;
+}
+
+	//koniec
+    int il=0;
+    int ill=0;
+    data->e=380;
+    while(il<k)
+    {
+        gtk_button_set_image(data->sprawdze[data->i][x], gtk_image_new_from_file("czarny.png"));
+        gtk_fixed_put(GTK_FIXED(data->konte2), data->sprawdze[data->i][x], data->e, data->f);
+        x++;
+		data->e=data->e+50;
+		il++;
+    }
+    il=0;
+    while(il<p)
+    {
+        gtk_button_set_image(data->sprawdze[data->i][x], gtk_image_new_from_file("bialy.png"));
+        gtk_fixed_put(GTK_FIXED(data->konte2), data->sprawdze[data->i][x], data->e, data->f);
+        x++;
+		data->e=data->e+50;
+		il++;
+    }
+
+    gtk_widget_set_sensitive(data->wproba[data->i][0], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], FALSE);
+GtkWidget *widget;
+data->i++;
+if(k==4)
+{
+
+
+           GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, uda³o Ci siê odgadn¹æ kod!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Zgad³eœ!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+
+
+
+
+
+}
+else
+    {
+        if(data->i==9)
+        {
+
+
+
+       GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Niestety, nie uda³o Ci siê odgadn¹æ kodu.");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Nie uda³o siê!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+
+
+
+    }
+
+        else
+            {
+                //nowe guziki
+                data->y=data->y+105;
+        data->f=data->f+105;
+        data->ff=data->ff+105;
+        data->fff=data->fff+105;
+        data->tproba[0]=7;gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+    data->tproba[1]=7;
+    data->tproba[2]=7;
+    data->tproba[3]=7;
+        data->kontrola=4;
+    gtk_fixed_put(GTK_FIXED(data->konte2), gtk_image_new_from_file("ramka.jpg"), 10, data->y);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->numerki[data->i], data->aaa, data->fff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][0], data->a, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][1], data->b, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][2], data->c, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][3], data->d, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][0], data->aa, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][1], data->bb, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][2], data->cc, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][3], data->dd, data->ff);
+    polaczeniaa(data);
+
+
+            }
+    }}
+gtk_widget_show_all(data->konte2);
+
+}
+
+void sprawdzanie(GtkWidget *widget, tmp* data)
+{
+    if(data->kontrola==0)
+        {int k=0, p=0, x=0;
+    data->omin[0]=5;
+    data->podo[0][0]=5;
+
+data->tkod[data->test]=data->pomoc;
+//pocz
+
+int t=0, u=0, l=0, o=0, lo=0, oo=0, loo=0;
+
+t = 0;
+while (t<4)
+{
+	if (data->tkod[t] == data->tproba[t])
+	{
+		data->omin[k + 1] = 5;
+		data->omin[k] = t;
+		k++;
+	}
+	t++;
+}
+t = 0, u = 0, lo = 0, loo = 0;
+
+while( t < 4)
+{
+	while( u < 4)
+	{
+		while( lo < k)
+		{
+			if (t == data->omin[lo])
+			{
+					o = 1;
+					break;
+			}
+			else
+			{
+				if (u == data->omin[lo])
+				{
+					o = 2;
+					break;
+				}
+				else
+				{
+					lo++;
+				}
+			}
+		}
+		if (o == 1)
+		{
+			o = 0;
+			lo = 0;
+			break;
+		}
+		else
+		{
+			if (o == 2)
+			{
+				o = 0;
+				lo = 0;
+				u++;
+				continue;
+			}
+			else
+			{
+				lo = 0;
+				while( loo < p)
+				{
+					if (t == data->podo[lo][0])
+					{
+						o = 1;
+						break;
+					}
+					else
+					{
+						if (u == data->podo[lo][1])
+						{
+							o = 2;
+							break;
+						}
+						else
+						{
+							loo++;
+						}
+					}
+				}
+				if (o == 1)
+				{
+					o = 0;
+					loo = 0;
+					break;
+				}
+				else
+				{
+					if (o == 2)
+					{
+						o = 0;
+						loo = 0;
+						u++;
+						continue;
+					}
+					else
+					{
+						if (data->tkod[t] == data->tproba[u])
+						{
+							loo = 0;
+							data->podo[p][0] = t;
+							data->podo[p][1] = u;
+							p++;
+							break;
+						}
+						else
+                        {
+                            u++;
+                            continue;
+                        }
+					}
+				}
+			}
+		}
+	}
+	t++;
+	u = 0;
+}
+
+	//koniec
+    int il=0;
+    int ill=0;
+    data->e=380;
+    while(il<k)
+    {
+        gtk_button_set_image(data->sprawdze[data->i][x], gtk_image_new_from_file("czarny.png"));
+        gtk_fixed_put(GTK_FIXED(data->konte2), data->sprawdze[data->i][x], data->e, data->f);
+        x++;
+		data->e=data->e+50;
+		il++;
+    }
+    il=0;
+    while(il<p)
+    {
+        gtk_button_set_image(data->sprawdze[data->i][x], gtk_image_new_from_file("bialy.png"));
+        gtk_fixed_put(GTK_FIXED(data->konte2), data->sprawdze[data->i][x], data->e, data->f);
+        x++;
+		data->e=data->e+50;
+		il++;
+    }
+
+    gtk_widget_set_sensitive(data->wproba[data->i][0], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], FALSE);
+GtkWidget *widget;
+data->i++;
+if(k==4)
+{
+    if(data->runda[0]==0)
+    {
+      data->runda[1]=data->i+1;
+      data->runda[0]=1;
+    data->tkod[0]=7;
+    data->tkod[1]=7;
+    data->tkod[2]=7;
+    data->tkod[3]=7;
+    data->tproba[0]=7;
+    data->tproba[1]=7;
+    data->tproba[2]=7;
+    data->tproba[3]=7;
+    data->kontrola=4;
+    data->i=0;
+    //
+    GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, graczowi 2. uda³o siê odgadn¹æ kod!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Zgad³eœ!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    //
+    gtk_widget_destroy(data->konte2);
+    gtk_widget_destroy(data->scrolled);
+    gras(widget, data);
+
+    }
+    else
+    {
+       data->runda[2]=data->i+1;
+       GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, graczowi 1. uda³o siê odgadn¹æ kod!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Zgad³eœ!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+       if(data->runda[1]<data->runda[2])
+       {
+           GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, gracz 2. wygra³!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Gracz 2. wygra³!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+       }
+       else
+       {
+           if(data->runda[1]>data->runda[2])
+           {
+               GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, gracz 1. wygra³!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Gracz 1. wygra³!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+
+           }
+           else
+           {
+               GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, obaj odgadliœcie kod za tym samym podejœciem!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Remis");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+           }
+       }
+
+    }
+
+}
+else
+    {
+        if(data->i==9)
+        {
+            if(data->runda[0]==0)
+    {
+      data->runda[1]=data->i+1;
+      data->runda[0]=1;
+    data->tkod[0]=7;
+    data->tkod[1]=7;
+    data->tkod[2]=7;
+    data->tkod[3]=7;
+    data->tproba[0]=7;
+    data->tproba[1]=7;
+    data->tproba[2]=7;
+    data->tproba[3]=7;
+    data->kontrola=4;
+    data->i=0;
+    //
+    GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Niestety, graczowi 2. nie uda³o siê odgadn¹æ kodu.");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Nie uda³o siê!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    //
+    gtk_widget_destroy(data->konte2);
+    gtk_widget_destroy(data->scrolled);
+    gras(widget, data);
+
+    }
+    else
+    {
+       data->runda[2]=data->i+1;
+       GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Niestety, graczowi 1. nie uda³o siê odgadn¹æ kodu.");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Nie uda³o siê!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+       if(data->runda[1]<data->runda[2])
+       {
+           GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, gracz 2. wygra³!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Gracz 2. wygra³!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+       }
+       else
+       {
+           if(data->runda[1]>data->runda[2])
+           {
+               GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, gracz 1. wygra³!");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Gracz 1. wygra³!");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+
+           }
+           else
+           {
+               GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Gratulacje, obaj nie odgadliœcie kod! :P");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Remis");
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(data->okno);
+    gtk1();
+           }
+       }
+
+    }
+        }
+        else
+            {
+                //nowe guziki
+                data->y=data->y+105;
+        data->f=data->f+105;
+        data->ff=data->ff+105;
+        data->fff=data->fff+105;
+        data->tproba[0]=7;gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+    data->tproba[1]=7;
+    data->tproba[2]=7;
+    data->tproba[3]=7;
+        data->kontrola=4;
+    gtk_fixed_put(GTK_FIXED(data->konte2), gtk_image_new_from_file("ramka.jpg"), 10, data->y);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->numerki[data->i], data->aaa, data->fff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][0], data->a, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][1], data->b, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][2], data->c, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][3], data->d, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][0], data->aa, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][1], data->bb, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][2], data->cc, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][3], data->dd, data->ff);
+    polaczenia(data);
+
+
+            }
+    }}
+gtk_widget_show_all(data->konte2);
+
+}
+
+void sprawdz(tmp *data)
+{
+
+    if(data->kontrola==0)
+    {
+      gtk_widget_set_sensitive(data->sprawdzz, TRUE);
+
+    }
+}
+
+void wybierz11(GtkWidget *widget, tmp *data)
+{
+
+if(data->tproba[data->test2]==7)
+     data->kontrola=data->kontrola-1;
+
+    gtk_button_set_image(data->proba[data->i][data->test2], gtk_image_new_from_file("czer.png"));
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wproba[data->i][0], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], TRUE);
+     data->tproba[data->test2]=1;
+
+     sprawdz(data);
+
+
+}
+
+void wybierz12(GtkWidget *widget, tmp *data)
+{
+    gtk_button_set_image(data->proba[data->i][data->test2], gtk_image_new_from_file("pomaranczowy.png"));
+    if(data->tproba[data->test2]==7)
+     data->kontrola=data->kontrola-1;
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wproba[data->i][0], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], TRUE);
+     data->tproba[data->test2]=2;
+sprawdz(data);
+
+}
+
+void wybierz13(GtkWidget *widget, tmp *data)
+{
+    if(data->tproba[data->test2]==7)
+     data->kontrola=data->kontrola-1;
+
+    gtk_button_set_image(data->proba[data->i][data->test2], gtk_image_new_from_file("zolty.png"));
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wproba[data->i][0], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], TRUE);
+     data->tproba[data->test2]=3;
+sprawdz(data);
+}
+
+void wybierz14(GtkWidget *widget, tmp *data)
+{
+    if(data->tproba[data->test2]==7)
+     data->kontrola=data->kontrola-1;
+    gtk_button_set_image(data->proba[data->i][data->test2], gtk_image_new_from_file("zielony.png"));
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wproba[data->i][0], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], TRUE);
+     data->tproba[data->test2]=4;
+sprawdz(data);
+}
+
+void wybierz15(GtkWidget *widget, tmp *data)
+{
+    if(data->tproba[data->test2]==7)
+     data->kontrola=data->kontrola-1;
+    gtk_button_set_image(data->proba[data->i][data->test2], gtk_image_new_from_file("niebieski.png"));
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wproba[data->i][0], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], TRUE);
+     data->tproba[data->test2]=5;
+sprawdz(data);
+}
+
+void wybierz16(GtkWidget *widget, tmp *data)
+{
+    if(data->tproba[data->test2]==7)
+     data->kontrola=data->kontrola-1;
+    gtk_button_set_image(data->proba[data->i][data->test2], gtk_image_new_from_file("fioletowy.png"));
+
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wproba[data->i][0], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], TRUE);
+     data->tproba[data->test2]=6;
+sprawdz(data);
+
+}
+
+void wybierz_proba(GtkWidget *kolorek, tmp *data)
+{
+
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], FALSE);
+    data->test2=0;
+
+    gtk_widget_show_all(data->okno);
+    data->j=0;
+
+}
+
+void wybierz_proba1(GtkWidget *kolorek, tmp *data)
+{
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+
+    gtk_widget_set_sensitive(data->wproba[data->i][0], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], FALSE);
+    data->test2=1;
+
+
+
+
+    gtk_widget_show_all(data->okno);
+    data->j=0;
+
+}
+
+
+void wybierz_proba2(GtkWidget *kolorek, tmp *data)
+{
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+
+    gtk_widget_set_sensitive(data->wproba[data->i][0], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][3], FALSE);
+    data->test2=2;
+
+
+
+    gtk_widget_show_all(data->okno);
+    data->j=0;
+
+}
+
+
+void wybierz_proba3(GtkWidget *kolorek, tmp *data)
+{
+
+
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+
+    gtk_widget_set_sensitive(data->wproba[data->i][0], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][1], FALSE);
+    gtk_widget_set_sensitive(data->wproba[data->i][2], FALSE);
+    data->test2=3;
+
+
+
+    gtk_widget_show_all(data->okno);
+    data->j=0;
+
+}
+
+
+
+void polaczenia(tmp *data)
+{
+    gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+    g_signal_connect(data->wproba[data->i][0], "clicked", G_CALLBACK(wybierz_proba), data);
+    g_signal_connect(data->wproba[data->i][1], "clicked", G_CALLBACK(wybierz_proba1), data);
+    g_signal_connect(data->wproba[data->i][2], "clicked", G_CALLBACK(wybierz_proba2), data);
+    g_signal_connect(data->wproba[data->i][3], "clicked", G_CALLBACK(wybierz_proba3), data);
+
+g_signal_connect(data->kolor[0], "clicked", G_CALLBACK(wybierz11), data);
+ g_signal_connect(data->kolor[1], "clicked", G_CALLBACK(wybierz12), data);
+ g_signal_connect(data->kolor[2], "clicked", G_CALLBACK(wybierz13), data);
+ g_signal_connect(data->kolor[3], "clicked", G_CALLBACK(wybierz14), data);
+ g_signal_connect(data->kolor[4], "clicked", G_CALLBACK(wybierz15), data);
+ g_signal_connect(data->kolor[5], "clicked", G_CALLBACK(wybierz16), data);
+
+ g_signal_connect(data->sprawdzz, "clicked", G_CALLBACK(sprawdzanie), data);
+   gtk_widget_show_all(data->okno);
+data->j=0;
+
+}
+
+void polaczeniaa(tmp *data)
+{
+    gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+    g_signal_connect(data->wproba[data->i][0], "clicked", G_CALLBACK(wybierz_proba), data);
+    g_signal_connect(data->wproba[data->i][1], "clicked", G_CALLBACK(wybierz_proba1), data);
+    g_signal_connect(data->wproba[data->i][2], "clicked", G_CALLBACK(wybierz_proba2), data);
+    g_signal_connect(data->wproba[data->i][3], "clicked", G_CALLBACK(wybierz_proba3), data);
+
+g_signal_connect(data->kolor[0], "clicked", G_CALLBACK(wybierz11), data);
+ g_signal_connect(data->kolor[1], "clicked", G_CALLBACK(wybierz12), data);
+ g_signal_connect(data->kolor[2], "clicked", G_CALLBACK(wybierz13), data);
+ g_signal_connect(data->kolor[3], "clicked", G_CALLBACK(wybierz14), data);
+ g_signal_connect(data->kolor[4], "clicked", G_CALLBACK(wybierz15), data);
+ g_signal_connect(data->kolor[5], "clicked", G_CALLBACK(wybierz16), data);
+
+ g_signal_connect(data->sprawdzz, "clicked", G_CALLBACK(sprawdzaniee), data);
+   gtk_widget_show_all(data->okno);
+data->j=0;
+
+}
+
+
+void rozgrywka2 (GtkWidget *widget, tmp* data)
+{
+    gtk_widget_destroy(data->info[0]);
+    gtk_widget_destroy(data->info[1]);
+    gtk_widget_destroy(data->info[2]);
+    gtk_widget_destroy(data->info[3]);
+    data->pomoc=data->tkod[data->test];
+     data->i=0;
+     data->y=1;
+    data->j=0;
+     data->konte2=gtk_fixed_new();
+     data->scrolled = gtk_scrolled_window_new (NULL, NULL);
+     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (data->scrolled), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+     gtk_widget_set_size_request(data->scrolled, 650, 500);
+     gtk_container_add(GTK_FIXED(data->konte), data->scrolled);
+
+    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW (data->scrolled), data->konte2);
+
+        data->sprawdzz=gtk_button_new_with_label("SprawdŸ!");
+     gtk_widget_set_size_request(data->sprawdzz, 180, 15);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->sprawdzz,  750, 600);
+     gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+
+         gtk_fixed_put(GTK_FIXED(data->konte), data->info[4], 670, 200);
+
+
+while(data->i<9)
+{
+    while(data->j<4)
+    {
+        data->proba[data->i][data->j]=gtk_button_new();
+        data->sprawdze[data->i][data->j]=gtk_button_new();
+        gtk_widget_set_size_request(data->proba[data->i][data->j], 70, 70);
+        gtk_widget_set_sensitive(data->proba[data->i][data->j], FALSE);
+        gtk_widget_set_sensitive(data->sprawdze[data->i][data->j], FALSE);
+
+        data->j++;
+    }
+        data->wproba[data->i][0]=gtk_button_new_with_label("1.");
+    data->wproba[data->i][1]=gtk_button_new_with_label("2.");
+    data->wproba[data->i][2]=gtk_button_new_with_label("3.");
+    data->wproba[data->i][3]=gtk_button_new_with_label("4.");
+        gtk_widget_set_size_request(data->wproba[data->i][0], 35, 10);
+        gtk_widget_set_size_request(data->wproba[data->i][1], 35, 10);
+        gtk_widget_set_size_request(data->wproba[data->i][2], 35, 10);
+        gtk_widget_set_size_request(data->wproba[data->i][3], 35, 10);
+    data->i++;
+    data->j=0;
+}
+    data->i=0;
+
+
+     data->a=20, data->b=110, data->c=200, data->d=290, data->f=5, data->aaa=550, data->aa=37, data->bb=127, data->cc=217, data->dd=307, data->ff=72, data->e=380, data->fff=42;
+
+     data->tproba[0]=7;
+     data->tproba[1]=7;
+    data->tproba[2]=7;
+    data->tproba[3]=7;
+        data->kontrola=4;
+
+
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+   gtk_widget_set_sensitive(data->kolor[1], FALSE);
+   gtk_widget_set_sensitive(data->kolor[2], FALSE);
+   gtk_widget_set_sensitive(data->kolor[3], FALSE);
+   gtk_widget_set_sensitive(data->kolor[4], FALSE);
+   gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+    gtk_fixed_put(GTK_FIXED(data->konte2), gtk_image_new_from_file("ramka.jpg"), 10, data->y);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->numerki[data->i], data->aaa, data->fff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][0], data->a, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][1], data->b, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][2], data->c, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][3], data->d, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][0], data->aa, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][1], data->bb, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][2], data->cc, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][3], data->dd, data->ff);
+    gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+     data->i=0;
+    polaczeniaa(data);
+
+
+    gtk_widget_show_all(data->okno);
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+void rozgrywka (GtkWidget *widget, tmp* data)
+{
+
+    data->pomoc=data->tkod[data->test];
+     data->i=0;
+     data->y=1;
+    data->j=0;
+     data->konte2=gtk_fixed_new();
+     data->scrolled = gtk_scrolled_window_new (NULL, NULL);
+     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (data->scrolled), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+     gtk_widget_set_size_request(data->scrolled, 650, 500);
+     gtk_container_add(GTK_FIXED(data->konte), data->scrolled);
+
+    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW (data->scrolled), data->konte2);
+
+        data->sprawdzz=gtk_button_new_with_label("SprawdŸ!");
+     gtk_widget_set_size_request(data->sprawdzz, 180, 15);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->sprawdzz,  750, 600);
+     gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+
+     if(data->runda[0]==0)
+     {
+         gtk_fixed_put(GTK_FIXED(data->konte), data->info[3], 670, 200);
+     }
+     else
+     {
+         gtk_fixed_put(GTK_FIXED(data->konte), data->info[1], 670, 200);
+     }
+
+while(data->i<9)
+{
+    while(data->j<4)
+    {
+        data->proba[data->i][data->j]=gtk_button_new();
+        data->sprawdze[data->i][data->j]=gtk_button_new();
+        gtk_widget_set_size_request(data->proba[data->i][data->j], 70, 70);
+        gtk_widget_set_sensitive(data->proba[data->i][data->j], FALSE);
+        gtk_widget_set_sensitive(data->sprawdze[data->i][data->j], FALSE);
+
+        data->j++;
+    }
+        data->wproba[data->i][0]=gtk_button_new_with_label("1.");
+    data->wproba[data->i][1]=gtk_button_new_with_label("2.");
+    data->wproba[data->i][2]=gtk_button_new_with_label("3.");
+    data->wproba[data->i][3]=gtk_button_new_with_label("4.");
+        gtk_widget_set_size_request(data->wproba[data->i][0], 35, 10);
+        gtk_widget_set_size_request(data->wproba[data->i][1], 35, 10);
+        gtk_widget_set_size_request(data->wproba[data->i][2], 35, 10);
+        gtk_widget_set_size_request(data->wproba[data->i][3], 35, 10);
+    data->i++;
+    data->j=0;
+}
+    data->i=0;
+
+
+     data->a=20, data->b=110, data->c=200, data->d=290, data->f=5, data->aaa=550, data->aa=37, data->bb=127, data->cc=217, data->dd=307, data->ff=72, data->e=380, data->fff=42;
+
+     data->tproba[0]=7;
+     data->tproba[1]=7;
+    data->tproba[2]=7;
+    data->tproba[3]=7;
+        data->kontrola=4;
+
+
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+   gtk_widget_set_sensitive(data->kolor[1], FALSE);
+   gtk_widget_set_sensitive(data->kolor[2], FALSE);
+   gtk_widget_set_sensitive(data->kolor[3], FALSE);
+   gtk_widget_set_sensitive(data->kolor[4], FALSE);
+   gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+    gtk_fixed_put(GTK_FIXED(data->konte2), gtk_image_new_from_file("ramka.jpg"), 10, data->y);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->numerki[data->i], data->aaa, data->fff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][0], data->a, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][1], data->b, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][2], data->c, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->proba[data->i][3], data->d, data->f);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][0], data->aa, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][1], data->bb, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][2], data->cc, data->ff);
+    gtk_fixed_put(GTK_FIXED(data->konte2), data->wproba[data->i][3], data->dd, data->ff);
+    gtk_widget_set_sensitive(data->sprawdzz, FALSE);
+     data->i=0;
+    polaczenia(data);
+
+
+    gtk_widget_show_all(data->okno);
+data->j=0;
+    while(data->j<4)
+    {
+        gtk_widget_destroy(data->kod[data->j]);
+        gtk_widget_destroy(data->wybor[data->j]);
+        data->j++;}
+    gtk_widget_destroy(data->startk);
+    if(data->runda[0]==0)
+    {
+        gtk_widget_destroy(data->info[0]);
+    }
+    else
+    {
+        gtk_widget_destroy(data->info[2]);
+    }
+
+
+
+
+
+
+
+}
+
+void start(tmp *data)
+{
+
+    if(data->kontrola==0)
+    {
+      gtk_widget_set_sensitive(data->startk, TRUE);
+
+    }
+}
+
+void wybierz1(GtkWidget *widget, tmp *data)
+{
+
+if(data->tkod[data->test]==7)
+     data->kontrola=data->kontrola-1;
+
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wybor[0], TRUE);
+    gtk_widget_set_sensitive(data->wybor[1], TRUE);
+    gtk_widget_set_sensitive(data->wybor[2], TRUE);
+    gtk_widget_set_sensitive(data->wybor[3], TRUE);
+
+    gtk_button_set_image(data->kod[data->test], gtk_image_new_from_file("czer.png"));
+    data->tkod[data->test]=1;
+    start(data);
+
+
+
+
+
+
+}
+
+void wybierz2(GtkWidget *widget, tmp *data)
+{
+    gtk_button_set_image(data->kod[data->test], gtk_image_new_from_file("pomaranczowy.png"));
+    if(data->tkod[data->test]==7)
+     data->kontrola=data->kontrola-1;
+    data->tkod[data->test]=2;
+
+    gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wybor[0], TRUE);
+    gtk_widget_set_sensitive(data->wybor[1], TRUE);
+    gtk_widget_set_sensitive(data->wybor[2], TRUE);
+    gtk_widget_set_sensitive(data->wybor[3], TRUE);
+start(data);
+
+}
+
+void wybierz3(GtkWidget *widget, tmp *data)
+{
+    if(data->tkod[data->test]==7)
+     data->kontrola=data->kontrola-1;
+    data->tkod[data->test]=3;
+    gtk_button_set_image(data->kod[data->test], gtk_image_new_from_file("zolty.png"));
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wybor[0], TRUE);
+    gtk_widget_set_sensitive(data->wybor[1], TRUE);
+    gtk_widget_set_sensitive(data->wybor[2], TRUE);
+    gtk_widget_set_sensitive(data->wybor[3], TRUE);
+
+start(data);
+}
+
+void wybierz4(GtkWidget *widget, tmp *data)
+{
+    if(data->tkod[data->test]==7)
+     data->kontrola=data->kontrola-1;
+    gtk_button_set_image(data->kod[data->test], gtk_image_new_from_file("zielony.png"));
+    data->tkod[data->test]=4;
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wybor[0], TRUE);
+    gtk_widget_set_sensitive(data->wybor[1], TRUE);
+    gtk_widget_set_sensitive(data->wybor[2], TRUE);
+    gtk_widget_set_sensitive(data->wybor[3], TRUE);
+start(data);
+}
+
+void wybierz5(GtkWidget *widget, tmp *data)
+{
+    if(data->tkod[data->test]==7)
+     data->kontrola=data->kontrola-1;
+    gtk_button_set_image(data->kod[data->test], gtk_image_new_from_file("niebieski.png"));
+    data->tkod[data->test]=5;
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wybor[0], TRUE);
+    gtk_widget_set_sensitive(data->wybor[1], TRUE);
+    gtk_widget_set_sensitive(data->wybor[2], TRUE);
+    gtk_widget_set_sensitive(data->wybor[3], TRUE);
+start(data);
+}
+
+void wybierz6(GtkWidget *widget, tmp *data)
+{
+    if(data->tkod[data->test]==7)
+     data->kontrola=data->kontrola-1;
+    gtk_button_set_image(data->kod[data->test], gtk_image_new_from_file("fioletowy.png"));
+
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wybor[0], TRUE);
+    gtk_widget_set_sensitive(data->wybor[1], TRUE);
+    gtk_widget_set_sensitive(data->wybor[2], TRUE);
+    gtk_widget_set_sensitive(data->wybor[3], TRUE);
+     data->tkod[data->test]=6;
+start(data);
+
+}
+
+
+void wybierz_kod(GtkWidget *kolorek, tmp *data)
+{
+
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+
+    gtk_widget_set_sensitive(data->wybor[1], FALSE);
+    gtk_widget_set_sensitive(data->wybor[2], FALSE);
+    gtk_widget_set_sensitive(data->wybor[3], FALSE);
+    data->test=0;
+
+    gtk_widget_show_all(data->okno);
+
+}
+
+
+void wybierz_kod1(GtkWidget *kolorek, tmp *data)
+{
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+
+
+    gtk_widget_set_sensitive(data->wybor[0], FALSE);
+    gtk_widget_set_sensitive(data->wybor[2], FALSE);
+    gtk_widget_set_sensitive(data->wybor[3], FALSE);
+    data->test=1;
+
+
+
+
+    gtk_widget_show_all(data->okno);
+}
+
+
+void wybierz_kod2(GtkWidget *kolorek, tmp *data)
+{
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+
+
+    gtk_widget_set_sensitive(data->wybor[0], FALSE);
+    gtk_widget_set_sensitive(data->wybor[1], FALSE);
+    gtk_widget_set_sensitive(data->wybor[3], FALSE);
+    data->test=2;
+
+
+
+    gtk_widget_show_all(data->okno);
+}
+
+
+void wybierz_kod3(GtkWidget *kolorek, tmp *data)
+{
+
+
+    gtk_widget_set_sensitive(data->kolor[0], TRUE);
+    gtk_widget_set_sensitive(data->kolor[1], TRUE);
+    gtk_widget_set_sensitive(data->kolor[2], TRUE);
+    gtk_widget_set_sensitive(data->kolor[3], TRUE);
+    gtk_widget_set_sensitive(data->kolor[4], TRUE);
+    gtk_widget_set_sensitive(data->kolor[5], TRUE);
+
+
+    gtk_widget_set_sensitive(data->wybor[0], FALSE);
+    gtk_widget_set_sensitive(data->wybor[1], FALSE);
+    gtk_widget_set_sensitive(data->wybor[2], FALSE);
+    data->test=3;
+
+
+    gtk_widget_show_all(data->okno);
+}
+
+
+void gras(GtkWidget *widget, tmp *data)
+{
+
+g_type_class_unref(g_type_class_ref(GTK_TYPE_BUTTON));
+  GtkSettings *default_settings = gtk_settings_get_default();
+g_object_set(default_settings, "gtk-button-images", TRUE, NULL);
+    if(data->runda[0]==0){
+    gtk_fixed_put(GTK_FIXED(data->konte), data->info[0], 690, 200);
+    }
+    else{
+            gtk_widget_destroy(data->info[3]);
+        gtk_fixed_put(GTK_FIXED(data->konte), data->info[2], 690, 200);
+    }
+    //usuwanie menu
+    gtk_widget_destroy(data->obraz);
+    gtk_widget_destroy(data->game);
+    gtk_widget_destroy(data->cgame);
+    gtk_widget_destroy(data->wgame);
+    gtk_widget_destroy(data->exitt);
+    gtk_widget_destroy(data->instr);
+
+        //tworzenie przyciskow
+        data->kolor[0]=gtk_button_new();
+        data->kolor[1]=gtk_button_new();
+        data->kolor[2]=gtk_button_new();
+        data->kolor[3]=gtk_button_new();
+        data->kolor[4]=gtk_button_new();
+        data->kolor[5]=gtk_button_new();
+
+
+         data->wybor[0]=gtk_button_new_with_label("1.");
+         data->wybor[1]=gtk_button_new_with_label("2.");
+         data->wybor[2]=gtk_button_new_with_label("3.");
+         data->wybor[3]=gtk_button_new_with_label("4.");
+
+        //ustawianie obrazka
+        gtk_button_set_image(data->kolor[0], gtk_image_new_from_file("czer.png"));
+        gtk_button_set_image(data->kolor[1], gtk_image_new_from_file("pomaranczowy.png"));
+        gtk_button_set_image(data->kolor[2], gtk_image_new_from_file("zolty.png"));
+        gtk_button_set_image(data->kolor[3], gtk_image_new_from_file("zielony.png"));
+        gtk_button_set_image(data->kolor[4], gtk_image_new_from_file("niebieski.png"));
+        gtk_button_set_image(data->kolor[5], gtk_image_new_from_file("fioletowy.png"));
+
+        //dodanie do kontenera przyciskow
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[0],  700, 40);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[1],  800, 40);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[2],  900, 40);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[3],  700, 120);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[4],  800, 120);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[5],  900, 120);
+
+
+     gtk_widget_set_size_request(data->wybor[0], 35, 10);
+     gtk_widget_set_size_request(data->wybor[1], 35, 10);
+     gtk_widget_set_size_request(data->wybor[2], 35, 10);
+     gtk_widget_set_size_request(data->wybor[3], 35, 10);
+
+     gtk_fixed_put(GTK_FIXED(data->konte), data->wybor[0],  707, 310);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->wybor[1],  777, 310);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->wybor[2],  847, 310);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->wybor[3],  917, 310);
+
+
+     //przyciski od kodu
+
+     data->startk=gtk_button_new_with_label("Start!");
+     data->kod[0]=gtk_button_new();
+     data->kod[1]=gtk_button_new();
+     data->kod[2]=gtk_button_new();
+     data->kod[3]=gtk_button_new();
+
+     //ustawianie szerokoœci przycisków kodu
+
+     gtk_widget_set_size_request(data->startk, 180, 15);
+     gtk_widget_set_size_request(data->kod[0], 70, 70);
+     gtk_widget_set_size_request(data->kod[1], 70, 70);
+     gtk_widget_set_size_request(data->kod[2], 70, 70);
+     gtk_widget_set_size_request(data->kod[3], 70, 70);
+
+    //wstawienie przycisków do kontenera
+    gtk_fixed_put(GTK_FIXED(data->konte), data->startk,  750, 600);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kod[0],  690, 240);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kod[1],  760, 240);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kod[2],  830, 240);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kod[3],  900, 240);
+
+     gtk_widget_set_sensitive(data->startk, FALSE);
+
+     gtk_widget_set_sensitive(data->kod[0], FALSE);
+     gtk_widget_set_sensitive(data->kod[1], FALSE);
+     gtk_widget_set_sensitive(data->kod[2], FALSE);
+     gtk_widget_set_sensitive(data->kod[3], FALSE);
+
+
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+     gtk_widget_set_sensitive(data->wybor[0], TRUE);
+    gtk_widget_set_sensitive(data->wybor[1], TRUE);
+    gtk_widget_set_sensitive(data->wybor[2], TRUE);
+    gtk_widget_set_sensitive(data->wybor[3], TRUE);
+
+
+
+
+
+
+     //wywolanie funkcji po kliknieciu
+    g_signal_connect(data->wybor[0], "clicked", G_CALLBACK(wybierz_kod), data);
+     g_signal_connect(data->wybor[1], "clicked", G_CALLBACK(wybierz_kod1), data);
+     g_signal_connect(data->wybor[2], "clicked", G_CALLBACK(wybierz_kod2), data);
+     g_signal_connect(data->wybor[3], "clicked", G_CALLBACK(wybierz_kod3), data);
+
+
+ g_signal_connect(data->kolor[0], "clicked", G_CALLBACK(wybierz1), data);
+ g_signal_connect(data->kolor[1], "clicked", G_CALLBACK(wybierz2), data);
+ g_signal_connect(data->kolor[2], "clicked", G_CALLBACK(wybierz3), data);
+ g_signal_connect(data->kolor[3], "clicked", G_CALLBACK(wybierz4), data);
+ g_signal_connect(data->kolor[4], "clicked", G_CALLBACK(wybierz5), data);
+ g_signal_connect(data->kolor[5], "clicked", G_CALLBACK(wybierz6), data);
+
+  g_signal_connect(data->startk, "clicked", G_CALLBACK(rozgrywka), data);
+
+      gtk_widget_show_all(data->okno);
+
+
+
+
+
+}
+
+
+
+void instruk(GtkWidget *widget, tmp *data)
+{
+
+    GtkWidget *dialog;
+    dialog = gtk_message_dialog_new(GTK_WINDOW(data->okno), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Mastermind jest jedn¹ z popularnych niegdyœ gier. Gra polega na odgadniêciu 4 ukrytych kul, które jeden z graczy ustawi³. Gra zostanie rozwi¹zana, jeœli w ci¹gu 9 tur drugi gracz odgadnie te kule. W ka¿dej turze gracz wybiera 4 kule, po czym sprawdza czy trafi³. Ka¿da prawid³owo odgadniêta kula (czyli kula o w³aœciwym kolorze na w³aœciwym miejscu) sygnalizowana jest czarn¹ kropk¹. Jeœli gracz odgad³ kolor kuli, nie odgad³ zaœ jej lokalizacji, jest to sygnalizowane bia³¹ kropk¹. Gracz nie wie, które kule s¹ w³aœciwe, które zaœ nie.");
+    gtk_window_set_title(GTK_WINDOW(dialog), "Instrukcja");
+
+    gtk_dialog_run(GTK_DIALOG(dialog));
+
+
+     gtk_widget_destroy(dialog);
+
+}
+
+void graszz(GtkWidget *widget, tmp *data)
+{
+    gtk_widget_destroy(data->obraz);
+    gtk_widget_destroy(data->game);
+    gtk_widget_destroy(data->cgame);
+    gtk_widget_destroy(data->wgame);
+    gtk_widget_destroy(data->exitt);
+    gtk_widget_destroy(data->instr);
+
+    g_type_class_unref(g_type_class_ref(GTK_TYPE_BUTTON));
+  GtkSettings *default_settings = gtk_settings_get_default();
+g_object_set(default_settings, "gtk-button-images", TRUE, NULL);
+    if(data->runda[0]==0){
+    gtk_fixed_put(GTK_FIXED(data->konte), data->info[0], 690, 200);
+    }
+    else{
+            gtk_widget_destroy(data->info[3]);
+        gtk_fixed_put(GTK_FIXED(data->konte), data->info[2], 690, 200);
+    }
+
+
+        //tworzenie przyciskow
+        data->kolor[0]=gtk_button_new();
+        data->kolor[1]=gtk_button_new();
+        data->kolor[2]=gtk_button_new();
+        data->kolor[3]=gtk_button_new();
+        data->kolor[4]=gtk_button_new();
+        data->kolor[5]=gtk_button_new();
+
+
+
+
+        //ustawianie obrazka
+        gtk_button_set_image(data->kolor[0], gtk_image_new_from_file("czer.png"));
+        gtk_button_set_image(data->kolor[1], gtk_image_new_from_file("pomaranczowy.png"));
+        gtk_button_set_image(data->kolor[2], gtk_image_new_from_file("zolty.png"));
+        gtk_button_set_image(data->kolor[3], gtk_image_new_from_file("zielony.png"));
+        gtk_button_set_image(data->kolor[4], gtk_image_new_from_file("niebieski.png"));
+        gtk_button_set_image(data->kolor[5], gtk_image_new_from_file("fioletowy.png"));
+
+        //dodanie do kontenera przyciskow
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[0],  700, 40);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[1],  800, 40);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[2],  900, 40);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[3],  700, 120);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[4],  800, 120);
+     gtk_fixed_put(GTK_FIXED(data->konte), data->kolor[5],  900, 120);
+
+
+     gtk_widget_set_sensitive(data->kolor[0], FALSE);
+    gtk_widget_set_sensitive(data->kolor[1], FALSE);
+    gtk_widget_set_sensitive(data->kolor[2], FALSE);
+    gtk_widget_set_sensitive(data->kolor[3], FALSE);
+    gtk_widget_set_sensitive(data->kolor[4], FALSE);
+    gtk_widget_set_sensitive(data->kolor[5], FALSE);
+
+
+
+    srand(time(NULL));
+    data->tkod[0]=(rand() % 6 ) + 1;
+    data->tkod[1]=(rand() % 6 ) + 1;
+    data->tkod[2]=(rand() % 6 ) + 1;
+    data->tkod[3]=(rand() % 6 ) + 1;
+    data->runda[0]=1;
+
+    rozgrywka2(widget, data);
+}
+
+
+void grasz(GtkWidget *widget, tmp *data)
+{
+    gtk_widget_hide(data->game);
+    gtk_widget_hide(data->exitt);
+    gtk_widget_hide(data->instr);
+    data->cgame=gtk_button_new_with_label("Odgadnij kod");
+    data->wgame=gtk_button_new_with_label("1vs1");
+    gtk_widget_set_size_request(data->cgame, 180, 35);
+    gtk_widget_set_size_request(data->wgame, 180, 35);
+    gtk_fixed_put(GTK_FIXED(data->konte), data->cgame,  410, 440);
+   gtk_fixed_put(GTK_FIXED(data->konte), data->wgame, 410, 490);
+   g_signal_connect(data->wgame, "clicked", G_CALLBACK(gras), data);
+   g_signal_connect(data->cgame, "clicked", G_CALLBACK(graszz), data);
+   gtk_widget_show(data->cgame);
+   gtk_widget_show(data->wgame);
+}
+
+
+void gtk1(int argc, char *argv[])
+{
+
+
+
+  tmp *data = malloc(sizeof(*data));
+    gtk_init (&argc, &argv);
+
+    data->okno = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_default_size (GTK_WINDOW(data->okno), 1000, 700);
+
+    data->tkod[0]=7;
+    data->tkod[1]=7;
+    data->tkod[2]=7;
+    data->tkod[3]=7;
+    data->kontrola=4;
+    data->runda[0]=0;
+    char *str = "<span font='25'>Gracz 1. ustala kod</span>";
+    char *str2 = "<span font='25'>Gracz 2. ustala kod</span>";
+    char *str1 = "<span font='25'>Gracz 1. zgaduje kod</span>";
+    char *str3 = "<span font='25'>Gracz 2. zgaduje kod</span>";
+    char *str4 = "<span font='25'>Gracz zgaduje kod</span>";
+
+    char *nr = "<span font='20'>1/9</span>";
+    char *nr1 = "<span font='20'>2/9</span>";
+    char *nr2 = "<span font='20'>3/9</span>";
+    char *nr3= "<span font='20'>4/9</span>";
+    char *nr4 = "<span font='20'>5/9</span>";
+    char *nr5 = "<span font='20'>6/9</span>";
+    char *nr6 = "<span font='20'>7/9</span>";
+    char *nr7 = "<span font='20'>8/9</span>";
+    char *nr8 = "<span font='20'>9/9</span>";
+    data->info[0] = gtk_label_new(NULL);
+    data->info[1] = gtk_label_new(NULL);
+    data->info[2] = gtk_label_new(NULL);
+    data->info[3] = gtk_label_new(NULL);
+     data->info[4] = gtk_label_new(NULL);
+
+     data->numerki[0] = gtk_label_new(NULL);
+     data->numerki[1] = gtk_label_new(NULL);
+     data->numerki[2] = gtk_label_new(NULL);
+     data->numerki[3] = gtk_label_new(NULL);
+     data->numerki[4] = gtk_label_new(NULL);
+     data->numerki[5] = gtk_label_new(NULL);
+     data->numerki[6] = gtk_label_new(NULL);
+     data->numerki[7] = gtk_label_new(NULL);
+     data->numerki[8] = gtk_label_new(NULL);
+
+    gtk_label_set_markup(GTK_LABEL(data->info[0]), str);
+    gtk_label_set_markup(GTK_LABEL(data->info[1]), str1);
+    gtk_label_set_markup(GTK_LABEL(data->info[2]), str2);
+    gtk_label_set_markup(GTK_LABEL(data->info[3]), str3);
+    gtk_label_set_markup(GTK_LABEL(data->info[4]), str4);
+
+    gtk_label_set_markup(GTK_LABEL(data->numerki[0]), nr);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[1]), nr1);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[2]), nr2);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[3]), nr3);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[4]), nr4);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[5]), nr5);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[6]), nr6);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[7]), nr7);
+    gtk_label_set_markup(GTK_LABEL(data->numerki[8]), nr8);
+
+
+    gtk_window_set_position(GTK_WINDOW(data->okno), GTK_WIN_POS_CENTER);
+    gtk_window_set_title (GTK_WINDOW(data->okno), "MindMaster");
+    gtk_window_set_default_icon_from_file ("logo.png", NULL);
+
+    gtk_container_set_border_width(GTK_CONTAINER(data->okno), 5);
+
+
+    data->obraz = gtk_image_new_from_file("obraz.jpg");
+
+
+    data->konte=gtk_fixed_new();
+    gtk_container_add(GTK_CONTAINER(data->okno), data->konte);
+
+
+
+    gtk_fixed_put(GTK_FIXED(data->konte), data->obraz, 350, 5);
+   //przyciski
+
+    data->game = gtk_button_new_with_label("Nowa gra");
+    data->instr = gtk_button_new_with_label("Instrukcja");
+    data->exitt = gtk_button_new_with_label("Wyjœcie");
+
+
+    //podlaczanie przyciskow pod box
+   gtk_widget_set_size_request(data->game, 180, 35);
+   gtk_widget_set_size_request(data->instr, 180, 35);
+   gtk_widget_set_size_request(data->exitt, 180, 35);
+
+
+   gtk_fixed_put(GTK_FIXED(data->konte), data->game,  410, 440);
+   gtk_fixed_put(GTK_FIXED(data->konte), data->instr, 410, 490);
+   gtk_fixed_put(GTK_FIXED(data->konte), data->exitt, 410, 540);
+    //kontrola przycikow
+
+
+    g_signal_connect(data->game, "clicked", G_CALLBACK(grasz), data);
+
+    g_signal_connect(data->instr, "clicked", G_CALLBACK(instruk), data);
+    g_signal_connect (data->exitt, "clicked", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(G_OBJECT(data->okno), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+
+    gtk_widget_show_all(data->okno);
+
+
+    gtk_main ();
+
+}
+
+int main (int argc, char *argv[])
+  {
+   gtk1(argc, argv);
+
+    return 0;
+}
